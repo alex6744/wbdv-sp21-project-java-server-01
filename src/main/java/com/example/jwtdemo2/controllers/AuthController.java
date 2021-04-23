@@ -1,5 +1,6 @@
 package com.example.jwtdemo2.controllers;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -56,7 +57,14 @@ public class AuthController {
    @Autowired
 	RatingService ratingService;
 
+	@GetMapping ("/rating")
+	public List<String> find(){
+		List<String> a=new ArrayList<>();
+		a.add("sds");
+		a.add("hello");
+		return  a;
 
+	}
 	@GetMapping ("/rating/{mid}")
 	public List<Rating> findRatingbyMovieId(@PathVariable("mid") Integer mid){
 			Long l = new Long(mid);
