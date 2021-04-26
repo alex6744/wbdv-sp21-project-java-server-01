@@ -14,11 +14,7 @@ public class UserService {
 
 
     public int updateUserById(Long id, User user){
-        User originalUser=findUserById(id);
-
-        originalUser.setEmail(user.getEmail());
-
-        userRepository.save(originalUser);
+        userRepository.updateUser(id,user.getEmail());
         return 1;
     }
     public User findUserById(Long id) {

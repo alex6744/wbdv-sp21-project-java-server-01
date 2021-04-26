@@ -12,7 +12,6 @@ import com.example.jwtdemo2.models.Role;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
 	Optional<Role> findByName(ERole name);
+	boolean existsByName(ERole e);
 
-	@Query(value =" INSERT INTO roles(name) VALUES('ROLE_USER')", nativeQuery = true)
-	public void in();
 }

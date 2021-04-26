@@ -15,6 +15,8 @@ public class Rating {
 
     private Integer movieId;
 
+
+
     public Rating() {
     }
 

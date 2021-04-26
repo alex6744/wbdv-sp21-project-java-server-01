@@ -14,7 +14,7 @@ import java.util.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/controller")
 public class TestController {
 	private Long id;
 	private String username;
@@ -31,6 +31,7 @@ public class TestController {
 	}
 
 	@GetMapping("/profile")
+	@PreAuthorize("hasRole('USER') or hasRole('CREATOR') or hasRole('ADMIN')")
 	public User profile(HttpSession session) {
 		User currentUser = (User)
 				session.getAttribute("currentUser");
@@ -42,7 +43,7 @@ public class TestController {
 		return username;
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("/profile/{id}")
 	public int updateUser(@PathVariable("id") Integer id, @RequestBody User user){
 
 		Long l = new Long(id);
@@ -62,7 +63,7 @@ public class TestController {
 	}
 
 	@GetMapping("/user")
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('CREATOR') or hasRole('ADMIN')")
 	public List<String >userAccess() {
 		List<String> a=new ArrayList<>();
 		a.add("sddsasd");

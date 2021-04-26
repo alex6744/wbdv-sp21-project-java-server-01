@@ -7,7 +7,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 
-import com.example.jwtdemo2.models.Rating;
+import com.example.jwtdemo2.models.*;
+import com.example.jwtdemo2.repository.CreatorRepository;
 import com.example.jwtdemo2.services.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.jwtdemo2.models.ERole;
-import com.example.jwtdemo2.models.Role;
-import com.example.jwtdemo2.models.User;
 import com.example.jwtdemo2.payload.request.LoginRequest;
 import com.example.jwtdemo2.payload.request.SignupRequest;
 import com.example.jwtdemo2.payload.response.JwtResponse;
@@ -38,6 +36,9 @@ import javax.servlet.http.HttpSession;
 public class AuthController {
 	@Autowired
 	AuthenticationManager authenticationManager;
+
+	@Autowired
+	CreatorRepository creatorRepository;
 
 	@Autowired
 	UserRepository userRepository;
@@ -87,8 +88,27 @@ public class AuthController {
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
 		controller.setUsername(userDetails.getUsername());
+		Set<Role> r=new HashSet<>();
+		for(String s:roles){
+			Role role;
+			switch (s){
+
+				case "ROLE_ADMIN":
+					role=new Role(ERole.ROLE_ADMIN);
+					break;
+				case "ROLE_CREATOR":
+					role=new Role(ERole.ROLE_CREATOR);
+					break;
+				default:
+					role=new Role(ERole.ROLE_USER);
+
+			}
+			r.add(role);
+		}
+
 		User u=new User(userDetails.getId(),userDetails.getUsername(),
-				userDetails.getEmail());
+				userDetails.getEmail(),r);
+
 		session.setAttribute("currentUser", u);
 
 		return ResponseEntity.ok(new JwtResponse(jwt, 
@@ -133,12 +153,7 @@ public class AuthController {
 					roles.add(adminRole);
 
 					break;
-				case "mod":
-					Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(modRole);
 
-					break;
 				case "creator":
 					Role creatorRole = roleRepository.findByName(ERole.ROLE_CREATOR)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -155,7 +170,16 @@ public class AuthController {
 
 		user.setRoles(roles);
 		userRepository.save(user);
+		for(String s:strRoles){
+			if(s.equals("admin")){
 
+			}else if(s.equals("creator")){
+				Long id=userRepository.findByUsername(signUpRequest.getUsername()).get().getId();
+				userRepository.insertCreator(id,signUpRequest.getCompany());
+			}else {
+
+			}
+		}
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
 }

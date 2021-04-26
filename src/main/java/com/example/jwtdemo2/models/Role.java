@@ -17,6 +17,7 @@ public class Role {
 
 	}
 
+
 	public Role(ERole name) {
 		this.name = name;
 	}

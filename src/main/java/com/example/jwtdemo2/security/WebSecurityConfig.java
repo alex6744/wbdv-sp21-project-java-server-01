@@ -17,7 +17,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.example.jwtdemo2.security.jwt.AuthEntryPointJwt;
 import com.example.jwtdemo2.security.jwt.AuthTokenFilter;
 import com.example.jwtdemo2.security.services.UserDetailsServiceImpl;
-
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import com.google.common.collect.ImmutableList;
+import java.util.Arrays;
+//https://stackoverflow.com/questions/42016126/cors-issue-no-access-control-allow-origin-header-is-present-on-the-requested
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
@@ -58,10 +63,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests().antMatchers("/api/auth/**").permitAll()
-			.antMatchers("/api/test/**").permitAll()
+			.antMatchers("/api/controller/**").permitAll()
 			.anyRequest().authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
 	}
+
 }

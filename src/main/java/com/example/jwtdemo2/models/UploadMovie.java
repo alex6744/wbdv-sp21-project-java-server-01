@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "uploadedMovies")
-public class uploadMovie {
+public class UploadMovie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -13,7 +13,7 @@ public class uploadMovie {
 
     private Integer userId;
 
-    public uploadMovie() {
+    public UploadMovie() {
     }
 
 
