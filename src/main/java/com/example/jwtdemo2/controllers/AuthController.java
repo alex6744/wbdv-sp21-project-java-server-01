@@ -110,7 +110,7 @@ public class AuthController {
 				userDetails.getEmail(),r);
 
 		session.setAttribute("currentUser", u);
-
+		session.setAttribute("token", jwt);
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(), 
 												 userDetails.getUsername(), 
@@ -135,7 +135,8 @@ public class AuthController {
 		// Create new user's account
 		User user = new User(signUpRequest.getUsername(), 
 							 signUpRequest.getEmail(),
-							 encoder.encode(signUpRequest.getPassword()));
+							 encoder.encode(signUpRequest.getPassword()),
+							signUpRequest.getFirstname(),signUpRequest.getLastname());
 
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
@@ -172,7 +173,8 @@ public class AuthController {
 		userRepository.save(user);
 		for(String s:strRoles){
 			if(s.equals("admin")){
-
+				Long id=userRepository.findByUsername(signUpRequest.getUsername()).get().getId();
+				userRepository.insertAdmin(id,signUpRequest.getPasscode());
 			}else if(s.equals("creator")){
 				Long id=userRepository.findByUsername(signUpRequest.getUsername()).get().getId();
 				userRepository.insertCreator(id,signUpRequest.getCompany());

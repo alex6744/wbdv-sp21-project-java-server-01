@@ -20,8 +20,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	Boolean existsByEmail(String email);
 
-	@Query(value="SELECT * FROM users WHERE id=:id", nativeQuery = true)
-	public User findUserById(@Param("id") Long Id);
+
 
 	@Modifying
 	@Query(value = "insert into creator (id,company) VALUES (:id,:company)", nativeQuery = true)
@@ -29,7 +28,22 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	void insertCreator( @Param("id") Long id,@Param("company") String company);
 
 	@Modifying
+	@Query(value = "insert into admin (id,passcode) VALUES (:id,:passcode)", nativeQuery = true)
+	@Transactional
+	void insertAdmin( @Param("id") Long id,@Param("passcode") String passcode);
+
+	@Modifying
 	@Query(value = "update users set email=:email where id=:id", nativeQuery = true)
 	@Transactional
-	void updateUser( @Param("id") Long id,@Param("email") String email);
+	void updateUserEmail( @Param("id") Long id,@Param("email") String email);
+
+	@Modifying
+	@Query(value = "update users set first_name=:firstname where id=:id", nativeQuery = true)
+	@Transactional
+	void updateUserFirst( @Param("id") Long id,@Param("firstname") String firstname);
+
+	@Modifying
+	@Query(value = "update users set last_name=:lastname where id=:id", nativeQuery = true)
+	@Transactional
+	void updateUserLast( @Param("id") Long id,@Param("lastname") String lastname);
 }

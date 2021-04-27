@@ -12,11 +12,20 @@ public class SignupRequest {
     private String email;
     
     private Set<String> role;
-    
+    private String lastname;
+    private String firstname;
 
     private String password;
-
+    private String passcode;
     private String company;
+
+    public String getPasscode() {
+        return passcode;
+    }
+
+    public void setPasscode(String passcode) {
+        this.passcode = passcode;
+    }
 
     public String getCompany() {
         return company;
@@ -24,6 +33,22 @@ public class SignupRequest {
 
     public void setCompany(String company) {
         this.company = company;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getUsername() {

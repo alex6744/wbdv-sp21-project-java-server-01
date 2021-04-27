@@ -1,6 +1,7 @@
 package com.example.jwtdemo2.models;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "ratings")
@@ -15,9 +16,17 @@ public class Rating {
 
     private Integer movieId;
 
-
+    private BigDecimal rate;
 
     public Rating() {
+    }
+
+    public BigDecimal getRate() {
+        return rate;
+    }
+
+    public void setRate(BigDecimal rate) {
+        this.rate = rate;
     }
 
     public Long getId() {

@@ -25,29 +25,59 @@ public class TestController {
 	@Autowired
 	RatingService ratingService;
 
+
+	@GetMapping("/signout")
+	public void logout
+			(HttpSession session) {
+		session.invalidate();
+	}
+
+	@GetMapping("/currentUser")
+	public List<Object> currentUser(HttpSession session) {
+		List<Object> c=new ArrayList<>();
+
+			c.add(session.getAttribute("token"));
+			c.add((Object) ((User) session.getAttribute("currentUser")).getUsername());
+
+
+		return c;
+	}
+
 	@GetMapping("/all")
 	public String allAccess() {
 		return "Public Content.";
 	}
 
-	@GetMapping("/profile")
-	@PreAuthorize("hasRole('USER') or hasRole('CREATOR') or hasRole('ADMIN')")
-	public User profile(HttpSession session) {
-		User currentUser = (User)
-				session.getAttribute("currentUser");
-		return currentUser;
-	}
+
 
 	@GetMapping("/lastsignin")
 	public String current() {
 		return username;
 	}
 
+	@GetMapping("/profile/{id}")
+	@PreAuthorize("hasRole('USER') or hasRole('CREATOR') or hasRole('ADMIN')")
+	public Optional<User> profile(@PathVariable("id") Integer id) {
+		Long l = new Long(id);
+
+		return userService.findUserById(l);
+	}
+
 	@PutMapping("/profile/{id}")
+	@PreAuthorize("hasRole('USER') or hasRole('CREATOR') or hasRole('ADMIN')")
 	public int updateUser(@PathVariable("id") Integer id, @RequestBody User user){
 
 		Long l = new Long(id);
-		return userService.updateUserById(l,user);
+		if(userService.existsEmail(user.getEmail())){
+			return 0;
+		}else {
+			if(user.getEmail()==null){
+				return userService.updateUserById(l, user,0);
+			}else {
+				return userService.updateUserById(l, user,1);
+			}
+		}
+
 	}
 
 	@PostMapping("/user/{uid}/rating")
@@ -59,7 +89,7 @@ public class TestController {
 	@GetMapping("/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
 	public User findUserById(@PathVariable("id") Long id){
-		return userService.findUserById(id);
+		return null;//userService.findUserById(id);
 	}
 
 	@GetMapping("/user")

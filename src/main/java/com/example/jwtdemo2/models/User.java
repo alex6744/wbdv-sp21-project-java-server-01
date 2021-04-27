@@ -67,7 +67,16 @@ public class User {
 		this.password = password;
 	}
 
-	public User(String username, String email ,Set<Role> roles) {
+	public User(String username, String email, String password, String firstName, String lastName) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+
+	}
+
+	public User(String username, String email , Set<Role> roles) {
 		this.username = username;
 		this.email = email;
 
