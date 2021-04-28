@@ -1,5 +1,7 @@
 package com.example.jwtdemo2.payload.request;
 
+// credit from
+//https://bezkoder.com/spring-boot-jwt-authentication/#google_vignette
 
 
 public class LoginRequest {

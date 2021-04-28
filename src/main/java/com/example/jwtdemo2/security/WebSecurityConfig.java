@@ -23,6 +23,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import com.google.common.collect.ImmutableList;
 import java.util.Arrays;
 //https://stackoverflow.com/questions/42016126/cors-issue-no-access-control-allow-origin-header-is-present-on-the-requested
+// credit from
+//https://bezkoder.com/spring-boot-jwt-authentication/#google_vignette
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(

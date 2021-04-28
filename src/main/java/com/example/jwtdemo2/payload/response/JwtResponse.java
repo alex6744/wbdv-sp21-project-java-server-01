@@ -1,6 +1,8 @@
 package com.example.jwtdemo2.payload.response;
 
 import java.util.List;
+// credit from
+//https://bezkoder.com/spring-boot-jwt-authentication/#google_vignette
 
 public class JwtResponse {
 	private String token;

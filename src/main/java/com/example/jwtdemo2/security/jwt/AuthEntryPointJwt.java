@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
+// credit from
+//https://bezkoder.com/spring-boot-jwt-authentication/#google_vignette
 
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {

@@ -28,8 +28,11 @@ import com.example.jwtdemo2.repository.RoleRepository;
 import com.example.jwtdemo2.repository.UserRepository;
 import com.example.jwtdemo2.security.jwt.JwtUtils;
 import com.example.jwtdemo2.security.services.UserDetailsImpl;
-
 import javax.servlet.http.HttpSession;
+//part of code credit from
+//https://bezkoder.com/spring-boot-jwt-authentication/#google_vignette
+
+
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController

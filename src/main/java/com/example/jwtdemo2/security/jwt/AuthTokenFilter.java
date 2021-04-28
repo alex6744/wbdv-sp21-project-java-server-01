@@ -18,6 +18,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.example.jwtdemo2.security.services.UserDetailsServiceImpl;
+// credit from
+//https://bezkoder.com/spring-boot-jwt-authentication/#google_vignette
 
 public class AuthTokenFilter extends OncePerRequestFilter {
 	@Autowired

@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
+//part of code credit from
+//https://bezkoder.com/spring-boot-jwt-authentication/#google_vignette
+
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController

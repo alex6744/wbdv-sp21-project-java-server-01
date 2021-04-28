@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 
 import com.example.jwtdemo2.models.User;
 import org.springframework.transaction.annotation.Transactional;
+// part of code credit from
+//https://bezkoder.com/spring-boot-jwt-authentication/#google_vignette
 
 
 @Repository

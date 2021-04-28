@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import com.example.jwtdemo2.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
+// credit from
+//https://bezkoder.com/spring-boot-jwt-authentication/#google_vignette
 
 @Component
 public class JwtUtils {

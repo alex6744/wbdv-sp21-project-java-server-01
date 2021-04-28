@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.jwtdemo2.models.User;
 import com.example.jwtdemo2.repository.UserRepository;
+// credit from
+//https://bezkoder.com/spring-boot-jwt-authentication/#google_vignette
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

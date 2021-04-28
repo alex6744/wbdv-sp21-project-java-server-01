@@ -2,6 +2,8 @@ package com.example.jwtdemo2.payload.request;
 
 import java.util.Set;
 
+// credit from
+//https://bezkoder.com/spring-boot-jwt-authentication/#google_vignette
 
  
 public class SignupRequest {

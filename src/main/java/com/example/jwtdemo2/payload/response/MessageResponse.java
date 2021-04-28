@@ -1,4 +1,6 @@
 package com.example.jwtdemo2.payload.response;
+// credit from
+//https://bezkoder.com/spring-boot-jwt-authentication/#google_vignette
 
 public class MessageResponse {
 	private String message;

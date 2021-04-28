@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.jwtdemo2.models.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+// credit from
+//https://bezkoder.com/spring-boot-jwt-authentication/#google_vignette
 
 public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;
