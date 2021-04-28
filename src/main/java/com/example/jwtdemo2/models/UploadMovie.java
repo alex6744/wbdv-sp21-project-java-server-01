@@ -9,12 +9,26 @@ public class UploadMovie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer movieId;
+    private Long movieId;
 
-    private Integer userId;
+    private Long userId;
 
     public UploadMovie() {
     }
 
+    public Long getMovieId() {
+        return movieId;
+    }
 
+    public void setMovieId(Long movieId) {
+        this.movieId = movieId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 }

@@ -1,6 +1,5 @@
 package com.example.jwtdemo2.models;
 
-import org.aspectj.weaver.ast.Or;
 import java.util.*;
 import javax.persistence.*;
 import java.util.Date;
@@ -8,19 +7,29 @@ import java.util.Date;
 @Table(name = "movies")
 public class Movie {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long movieId;
+    private String original_title;
+    private String release_date;
 
-    private Date release_date;
+    private  String original_language;
 
-    private  String language;
-
-    private  String plot;
+    private  String overview;
 
     @OneToMany(mappedBy = "movie")
     Set<OrderedMovie> orderedMovie;
 
+    @OneToMany(mappedBy = "movie")
+    Set<MovieRating> rates;
+
     public Movie() {
+    }
+
+    public String getOriginal_title() {
+        return original_title;
+    }
+
+    public void setOriginal_title(String original_title) {
+        this.original_title = original_title;
     }
 
     public Long getMovieId() {
@@ -31,27 +40,27 @@ public class Movie {
         this.movieId = movieId;
     }
 
-    public Date getRelease_date() {
+    public String getRelease_date() {
         return release_date;
     }
 
-    public void setRelease_date(Date release_date) {
+    public void setRelease_date(String release_date) {
         this.release_date = release_date;
     }
 
-    public String getLanguage() {
-        return language;
+    public String getOriginal_language() {
+        return original_language;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
+    public void setOriginal_language(String original_language) {
+        this.original_language = original_language;
     }
 
-    public String getPlot() {
-        return plot;
+    public String getOverview() {
+        return overview;
     }
 
-    public void setPlot(String plot) {
-        this.plot = plot;
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
 }

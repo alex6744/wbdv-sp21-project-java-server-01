@@ -38,6 +38,13 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	Set<OrderedMovie> orderedMovie;
 
+	@OneToMany(mappedBy = "user")
+	Set<MovieRating> movieRating;
+
+	@OneToMany(mappedBy = "user")
+	Set<TvRating> tvRating;
+
+
 	public User() {
 	}
 
@@ -81,6 +88,22 @@ public class User {
 		this.email = email;
 
 		this.roles = roles;
+	}
+
+	public Set<OrderedMovie> getOrderedMovie() {
+		return orderedMovie;
+	}
+
+	public void setOrderedMovie(Set<OrderedMovie> orderedMovie) {
+		this.orderedMovie = orderedMovie;
+	}
+
+	public Set<MovieRating> getRating() {
+		return movieRating;
+	}
+
+	public void setRating(Set<MovieRating> movieRating) {
+		this.movieRating = movieRating;
 	}
 
 	public Long getId() {

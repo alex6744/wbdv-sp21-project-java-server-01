@@ -1,7 +1,9 @@
 package com.example.jwtdemo2.repository;
 
+import java.util.List;
 import java.util.Optional;
 
+import com.example.jwtdemo2.models.MovieRating;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,7 +22,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	Boolean existsByEmail(String email);
 
-
+	public List<User> findAll();
 
 	@Modifying
 	@Query(value = "insert into creator (id,company) VALUES (:id,:company)", nativeQuery = true)

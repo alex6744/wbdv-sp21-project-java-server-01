@@ -9,7 +9,8 @@ import java.util.stream.Collectors;
 
 import com.example.jwtdemo2.models.*;
 import com.example.jwtdemo2.repository.CreatorRepository;
-import com.example.jwtdemo2.services.RatingService;
+import com.example.jwtdemo2.services.MovieRatingService;
+import com.example.jwtdemo2.services.TvRatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -56,24 +57,34 @@ public class AuthController {
 	TestController controller;
 
    @Autowired
-	RatingService ratingService;
+   MovieRatingService movieRatingService;
 
-	@GetMapping ("/rating")
-	public List<String> find(){
-		List<String> a=new ArrayList<>();
-		a.add("sds");
-		a.add("hello");
-		return  a;
+   @Autowired
+	TvRatingService tvRatingService;
 
+
+
+	@GetMapping ("/movierating/{mid}")
+	public List<rateDemo> findRatingByMovieId(@PathVariable("mid") Integer mid){
+		Long l = new Long(mid);
+		List<MovieRating> rates= movieRatingService.findRatingByMovieId(l);
+		List<rateDemo> ratings=new ArrayList<>();
+		for (MovieRating r:rates){
+			ratings.add(new rateDemo(r.getRatingId(),r.getComment(),r.getRate(),r.getUser().getUsername(),r.getMovie().getMovieId()));
+		}
+		return ratings;
 	}
-	@GetMapping ("/rating/{mid}")
-	public List<Rating> findRatingbyMovieId(@PathVariable("mid") Integer mid){
-			Long l = new Long(mid);
-			return  ratingService.findRatingByMovieId(l);
 
+	@GetMapping ("/tvrating/{tid}")
+	public List<rateDemo> findRatingByTvId(@PathVariable("tid") Integer tid){
+		Long l = new Long(tid);
+		List<TvRating> rates= tvRatingService.findRatingByTvId(l);
+		List<rateDemo> ratings=new ArrayList<>();
+		for (TvRating r:rates){
+			ratings.add(new rateDemo(r.getRatingId(),r.getComment(),r.getRate(),r.getUser().getUsername(),r.getTvId()));
+		}
+		return ratings;
 	}
-
-
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest, HttpSession session) {
 
@@ -87,7 +98,7 @@ public class AuthController {
 		List<String> roles = userDetails.getAuthorities().stream()
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
-		controller.setUsername(userDetails.getUsername());
+
 		Set<Role> r=new HashSet<>();
 		for(String s:roles){
 			Role role;
@@ -178,8 +189,6 @@ public class AuthController {
 			}else if(s.equals("creator")){
 				Long id=userRepository.findByUsername(signUpRequest.getUsername()).get().getId();
 				userRepository.insertCreator(id,signUpRequest.getCompany());
-			}else {
-
 			}
 		}
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

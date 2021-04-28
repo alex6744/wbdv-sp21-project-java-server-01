@@ -2,17 +2,11 @@ package com.example.jwtdemo2;
 
 
 import com.example.jwtdemo2.models.ERole;
-import com.example.jwtdemo2.repository.RoleRepository;
-import com.example.jwtdemo2.services.RatingService;
 import com.example.jwtdemo2.services.RoleService;
-import com.example.jwtdemo2.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import javax.swing.text.html.parser.Entity;
 
 @SpringBootApplication
 public class DemoApplication {
