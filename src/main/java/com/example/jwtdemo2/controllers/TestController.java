@@ -74,7 +74,14 @@ public class TestController {
 	@GetMapping("/findAllUser")
 	@PreAuthorize("hasRole('ADMIN')")
 	public List<User> findAllUser(){
-		return userService.findAllUser();
+		List<User> r=new ArrayList<>();
+		List<User> u=userService.findAllUser();
+		for(User a:u){
+			User b=new User(a);
+			r.add(b);
+		}
+
+		return r;
 	}
 
 	@PostMapping("/deleteMovieRating/{id}")

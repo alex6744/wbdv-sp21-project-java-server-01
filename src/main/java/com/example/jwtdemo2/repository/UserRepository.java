@@ -24,7 +24,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	Boolean existsByEmail(String email);
 
-	public List<User> findAll();
+
 
 	@Modifying
 	@Query(value = "insert into creator (id,company) VALUES (:id,:company)", nativeQuery = true)

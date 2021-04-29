@@ -56,7 +56,8 @@ public class User {
 		this.id = u.getId();
 		this.username = u.getUsername();
 		this.email = u.getEmail();
-
+		this.firstName=u.getFirstName();
+		this.lastName=u.getLastName();
 		this.roles = u.getRoles();
 	}
 
